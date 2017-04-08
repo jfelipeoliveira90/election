@@ -22,21 +22,46 @@ public final class Vote implements Serializable {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "candidate_id")
+    @JoinColumn(name = "id_candidate")
     private Candidate candidate;
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "voter_id")
+    @JoinColumn(name = "id_voter")
     private Voter voter;
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "position_id")
+    @JoinColumn(name = "id_position")
     private Position position;
 
     private Vote() {
         // jpa
+    }
+
+    // TODO mover GETs e SETs para design patterns builder
+    public Candidate getCandidate() {
+        return candidate;
+    }
+
+    public Voter getVoter() {
+        return voter;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setCandidate(Candidate candidate) {
+        this.candidate = candidate;
+    }
+
+    public void setVoter(Voter voter) {
+        this.voter = voter;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
     @Override

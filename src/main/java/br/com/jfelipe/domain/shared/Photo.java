@@ -1,15 +1,19 @@
 package br.com.jfelipe.domain.shared;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Lob;
 import java.io.Serializable;
 import java.util.Objects;
 
+import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
 import static com.google.common.base.Preconditions.checkArgument;
 import static org.springframework.util.StringUtils.hasText;
 
 @Embeddable
+@JsonAutoDetect(fieldVisibility = ANY)
 public final class Photo implements Serializable {
     private static final long serialVersionUID = 4216581677541765888L;
 
