@@ -1,32 +1,37 @@
 package br.com.jfelipe.domain.model.vote;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Objects;
 
+import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
+
 @Entity
 @Table(name = "tb_vote")
 @IdClass(VoteId.class)
+@JsonAutoDetect(fieldVisibility = ANY)
 public final class Vote implements Serializable {
     private static final long serialVersionUID = -3848472310482259522L;
 
     @Id
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "candidate_id")
     private Candidate candidate;
 
     @Id
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "voter_id")
     private Voter voter;
 
     @Id
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "position_id")
     private Position position;
 

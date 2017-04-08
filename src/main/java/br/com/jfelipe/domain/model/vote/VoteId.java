@@ -7,21 +7,12 @@ import java.util.Objects;
 public final class VoteId implements Serializable {
     private static final long serialVersionUID = -7787621258802361862L;
 
-    private final long candidate;
-    private final long voter;
-    private final long position;
+    private long candidate;
+    private long voter;
+    private long position;
 
-    @SuppressWarnings("unused")
     private VoteId() {
-        this.candidate = 0L;
-        this.voter = 0L;
-        this.position = 0L;
-    }
 
-    private VoteId(long candidate, long voter, long position) {
-        this.candidate = candidate;
-        this.voter = voter;
-        this.position = position;
     }
 
     @Override
