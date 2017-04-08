@@ -9,16 +9,19 @@ public final class VoteId implements Serializable {
 
     private final long candidate;
     private final long voter;
+    private final long position;
 
     @SuppressWarnings("unused")
     private VoteId() {
         this.candidate = 0L;
         this.voter = 0L;
+        this.position = 0L;
     }
 
-    private VoteId(long candidate, long voter) {
+    private VoteId(long candidate, long voter, long position) {
         this.candidate = candidate;
         this.voter = voter;
+        this.position = position;
     }
 
     @Override
@@ -27,12 +30,13 @@ public final class VoteId implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         VoteId voteId = (VoteId) o;
         return candidate == voteId.candidate &&
-                voter == voteId.voter;
+                voter == voteId.voter &&
+                position == voteId.position;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(candidate, voter);
+        return Objects.hash(candidate, voter, position);
     }
 
     @Override
@@ -40,6 +44,7 @@ public final class VoteId implements Serializable {
         return "VoteId{" +
                 "candidate=" + candidate +
                 ", voter=" + voter +
+                ", position=" + position +
                 '}';
     }
 }

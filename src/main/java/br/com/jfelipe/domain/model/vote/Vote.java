@@ -25,6 +25,11 @@ public final class Vote implements Serializable {
     @JoinColumn(name = "voter_id")
     private Voter voter;
 
+    @Id
+    @OneToOne
+    @JoinColumn(name = "position_id")
+    private Position position;
+
     private Vote() {
         // jpa
     }
@@ -35,12 +40,13 @@ public final class Vote implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Vote vote = (Vote) o;
         return Objects.equals(candidate, vote.candidate) &&
-                Objects.equals(voter, vote.voter);
+                Objects.equals(voter, vote.voter) &&
+                Objects.equals(position, vote.position);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(candidate, voter);
+        return Objects.hash(candidate, voter, position);
     }
 
     @Override
@@ -48,6 +54,7 @@ public final class Vote implements Serializable {
         return "Vote{" +
                 "candidate=" + candidate +
                 ", voter=" + voter +
+                ", position=" + position +
                 '}';
     }
 }
