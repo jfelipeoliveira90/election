@@ -1,7 +1,7 @@
-package br.com.jfelipe.interfaces.web.v1.vote;
+package br.com.jfelipe.interfaces.web.v1.voter;
 
-import br.com.jfelipe.application.VoteService;
-import br.com.jfelipe.domain.model.vote.Vote;
+import br.com.jfelipe.application.VoterService;
+import br.com.jfelipe.domain.model.vote.Voter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,17 +12,16 @@ import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
-@RequestMapping("v1/votes")
-public final class VoteController {
+@RequestMapping("v1/voters")
+public final class VoterController {
 
     @Autowired
-    private VoteService service;
+    private VoterService service;
 
-    //TODO Impl HATEOAS
     @RequestMapping(method = POST)
-    public ResponseEntity<Vote> vote(@RequestBody VoteDTO voteDTO) {
+    public ResponseEntity<Voter> create(@RequestBody Voter voter) {
         return ResponseEntity
                 .status(CREATED)
-                .body(service.vote(voteDTO));
+                .body(service.create(voter));
     }
 }

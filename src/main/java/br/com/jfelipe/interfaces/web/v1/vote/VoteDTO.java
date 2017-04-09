@@ -1,8 +1,8 @@
-package br.com.jfelipe.interfaces.web.v1.vote.dto;
+package br.com.jfelipe.interfaces.web.v1.vote;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.JoinColumn;
 import java.util.Objects;
 
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
@@ -10,13 +10,13 @@ import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
 @JsonAutoDetect(fieldVisibility = ANY)
 public final class VoteDTO {
 
-    @JoinColumn(name = "candidate-id")
+    @JsonProperty(value = "candidate-id", required = true)
     private long candidateId;
 
-    @JoinColumn(name = "voter-id")
+    @JsonProperty(value = "voter-id", required = true)
     private long voterId;
 
-    @JoinColumn(name = "position-id")
+    @JsonProperty(value = "position-id", required = true)
     private long positionId;
 
     private VoteDTO() {
