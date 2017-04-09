@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
+import static com.google.common.base.Preconditions.checkNotNull;
 import static javax.persistence.GenerationType.AUTO;
 
 @Entity
@@ -27,12 +28,14 @@ public final class Voter implements Serializable {
     @Embedded
     private FullName fullName;
 
+    @SuppressWarnings("unused")
     private Voter() {
         // jpa
     }
 
-    public long getId() {
-        return id;
+    private Voter(Builder builder) {
+        this.id = builder.id;
+        this.fullName = builder.fullName;
     }
 
     @Override
@@ -54,5 +57,26 @@ public final class Voter implements Serializable {
                 "id=" + id +
                 ", fullName=" + fullName +
                 '}';
+    }
+
+    public static final class Builder {
+        private long id;
+        private FullName fullName;
+
+        public Builder withId(long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder withFullName(FullName fullName) {
+            this.fullName = fullName;
+            return this;
+        }
+
+        public Voter build() {
+            checkNotNull(this.fullName);
+
+            return new Voter(this);
+        }
     }
 }

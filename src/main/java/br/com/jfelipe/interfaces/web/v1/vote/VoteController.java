@@ -2,6 +2,7 @@ package br.com.jfelipe.interfaces.web.v1.vote;
 
 import br.com.jfelipe.application.VoteService;
 import br.com.jfelipe.domain.model.vote.Vote;
+import br.com.jfelipe.interfaces.web.v1.vote.dto.VoteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +20,7 @@ public final class VoteController {
     private VoteService service;
 
     @RequestMapping(method = POST)
-    public ResponseEntity<Vote> vote(@RequestBody Vote vote) {
+    public ResponseEntity<Vote> vote(@RequestBody VoteDTO vote) {
         return ResponseEntity
                 .status(CREATED)
                 .body(service.vote(vote));

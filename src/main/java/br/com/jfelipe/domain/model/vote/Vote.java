@@ -39,29 +39,10 @@ public final class Vote implements Serializable {
         // jpa
     }
 
-    // TODO mover GETs e SETs para design patterns builder
-    public Candidate getCandidate() {
-        return candidate;
-    }
-
-    public Voter getVoter() {
-        return voter;
-    }
-
-    public Position getPosition() {
-        return position;
-    }
-
-    public void setCandidate(Candidate candidate) {
-        this.candidate = candidate;
-    }
-
-    public void setVoter(Voter voter) {
-        this.voter = voter;
-    }
-
-    public void setPosition(Position position) {
-        this.position = position;
+    private Vote(Builder builder) {
+        this.candidate = builder.candidate;
+        this.voter = builder.voter;
+        this.position = builder.position;
     }
 
     @Override
@@ -86,5 +67,30 @@ public final class Vote implements Serializable {
                 ", voter=" + voter +
                 ", position=" + position +
                 '}';
+    }
+
+    public static final class Builder {
+        private Candidate candidate;
+        private Voter voter;
+        private Position position;
+
+        public Builder withCandidate(Candidate candidate) {
+            this.candidate = candidate;
+            return this;
+        }
+
+        public Builder withVoter(Voter voter) {
+            this.voter = voter;
+            return this;
+        }
+
+        public Builder withPosition(Position position) {
+            this.position = position;
+            return this;
+        }
+
+        public Vote build() {
+            return new Vote(this);
+        }
     }
 }

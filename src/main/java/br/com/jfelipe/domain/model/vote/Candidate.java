@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
+import static com.google.common.base.Preconditions.checkNotNull;
 import static javax.persistence.GenerationType.AUTO;
 
 @Entity
@@ -31,12 +32,15 @@ public final class Candidate implements Serializable {
     @Embedded
     private Photo photo;
 
+    @SuppressWarnings("unused")
     private Candidate() {
         // jpa
     }
 
-    public long getId() {
-        return id;
+    private Candidate(Builder builder) {
+        this.id = builder.id;
+        this.fullName = builder.fullName;
+        this.photo = builder.photo;
     }
 
     @Override
@@ -59,5 +63,33 @@ public final class Candidate implements Serializable {
                 ", fullName=" + fullName +
                 ", photo=" + photo +
                 '}';
+    }
+
+    public static final class Builder {
+        private long id;
+        private FullName fullName;
+        private Photo photo;
+
+        public Builder withId(long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder withFullName(FullName fullName) {
+            this.fullName = fullName;
+            return this;
+        }
+
+        public Builder withPhoto(Photo photo) {
+            this.photo = photo;
+            return this;
+        }
+
+        public Candidate build() {
+            checkNotNull(fullName);
+            checkNotNull(photo);
+
+            return new Candidate(this);
+        }
     }
 }

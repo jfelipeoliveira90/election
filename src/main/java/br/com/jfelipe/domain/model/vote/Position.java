@@ -11,7 +11,9 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
+import static com.google.common.base.Preconditions.checkArgument;
 import static javax.persistence.GenerationType.AUTO;
+import static org.springframework.util.StringUtils.hasText;
 
 @Entity
 @Table(name = "tb_position")
@@ -26,12 +28,14 @@ public final class Position implements Serializable {
     @Column(name = "ds_description", length = 100, nullable = false)
     private String description;
 
+    @SuppressWarnings("unused")
     private Position() {
         // jpa
     }
 
-    public long getId() {
-        return id;
+    private Position(Builder builder) {
+        this.id = builder.id;
+        this.description = builder.description;
     }
 
     @Override
@@ -53,5 +57,26 @@ public final class Position implements Serializable {
                 "id=" + id +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+    public static final class Builder {
+        private long id;
+        private String description;
+
+        public Builder withId(long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder withDescription(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public Position build() {
+            checkArgument(hasText(this.description));
+
+            return new Position(this);
+        }
     }
 }

@@ -17,15 +17,14 @@ public final class FullName implements Serializable {
     private static final long serialVersionUID = -5525939606488141987L;
 
     @Column(name = "ds_name", length = 50, nullable = false)
-    private final String name;
+    private String name;
 
     @Column(name = "ds_lastname", length = 50, nullable = false)
-    private final String lastName;
+    private String lastName;
 
     @SuppressWarnings("unused")
     private FullName() {
-        this.name = null;
-        this.lastName = null;
+
     }
 
     private FullName(String name, String lastName) {
