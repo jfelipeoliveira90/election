@@ -13,7 +13,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 @RequestMapping("v1/votes")
-public final class VoteController {
+public class VoteController {
 
     @Autowired
     private VoteService service;

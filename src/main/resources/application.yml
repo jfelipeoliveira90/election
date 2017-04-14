@@ -7,3 +7,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: "create-drop"
+logging:
+  level:
+    root: "INFO"
+  pattern:
+    level: "%X{logID} %5p"
